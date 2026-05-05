@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YELL Store — Toko Digital Terpercaya</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080810;
+  --bg2: #0d0d1a;
+  --card: #11111f;
+  --card2: #161628;
+  --border: #1e1e38;
+  --border2: #2a2a4a;
+  --purple: #7c3aed;
+  --purple2: #a855f7;
+  --purple3: #c084fc;
+  --purple-glow: rgba(124,58,237,0.18);
+  --pink: #ec4899;
+  --text: #f0f0ff;
+  --muted: #6b6b9a;
+  --muted2: #9090b8;
+  --green: #22d3a0;
+  --gold: #f59e0b;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* GRAIN */
+body::after {
+  content:'';
+  position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:9997;
+}
+
+/* AMBIENT GLOW */
+.ambient {
+  position:fixed; pointer-events:none; z-index:0;
+}
+.amb1 {
+  width:700px; height:700px;
+  background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 65%);
+  top:-200px; left:-200px;
+  animation: drift1 12s ease-in-out infinite alternate;
+}
+.amb2 {
+  width:600px; height:600px;
+  background: radial-gradient(circle, rgba(236,72,153,0.08) 0%, transparent 65%);
+  bottom:-150px; right:-150px;
+  animation: drift2 15s ease-in-out infinite alternate;
+}
+@keyframes drift1 { to { transform: translate(60px, 40px); } }
+@keyframes drift2 { to { transform: translate(-50px, -30px); } }
+
+/* HEADER */
+header {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 16px 48px;
+  background: rgba(8,8,16,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+@media(max-width:768px){ header { padding:14px 20px; } }
+
+.logo {
+  font-family:'Cabinet Grotesk', sans-serif;
+  font-size:26px; font-weight:800;
+  letter-spacing:-1px;
+  background: linear-gradient(135deg, #c084fc, #7c3aed);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  position:relative;
+}
+.logo-tag {
+  font-size:9px; font-weight:700; letter-spacing:2px;
+  color: var(--muted2); text-transform:uppercase;
+  -webkit-text-fill-color: var(--muted2);
+  display:block; margin-top:-4px;
+}
+
+.nav-links {
+  display:flex; align-items:center; gap:32px; list-style:none;
+}
+@media(max-width:768px){ .nav-links { display:none; } }
+.nav-links a {
+  font-size:14px; font-weight:500; color:var(--muted2);
+  text-decoration:none; transition:color 0.2s;
+}
+.nav-links a:hover { color:var(--purple3); }
+
+.header-cta {
+  display:flex; align-items:center; gap:8px;
+  background: linear-gradient(135deg, var(--purple), var(--purple2));
+  color:#fff; font-size:13px; font-weight:700;
+  padding:9px 20px; border-radius:100px;
+  text-decoration:none; border:none; cursor:pointer;
+  transition:all 0.2s; box-shadow:0 0 20px rgba(124,58,237,0.3);
+}
+.header-cta:hover { transform:scale(1.04); box-shadow:0 0 30px rgba(124,58,237,0.5); }
+
+/* HERO */
+.hero {
+  position:relative; z-index:1;
+  min-height:100vh;
+  display:flex; align-items:center;
+  padding: 120px 48px 80px;
+  max-width:1200px; margin:0 auto;
+  gap:60px;
+}
+@media(max-width:900px){ .hero { flex-direction:column; padding:110px 24px 60px; gap:40px; } }
+
+.hero-left { flex:1; }
+
+.hero-pill {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(124,58,237,0.12); border:1px solid rgba(124,58,237,0.3);
+  border-radius:100px; padding:6px 16px 6px 8px;
+  margin-bottom:24px;
+}
+.pill-dot {
+  width:24px; height:24px; border-radius:50%;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px;
+}
+.pill-text { font-size:12px; font-weight:700; color:var(--purple3); letter-spacing:0.5px; }
+
+.hero h1 {
+  font-family:'Cabinet Grotesk', sans-serif;
+  font-size:clamp(40px,6vw,76px);
+  font-weight:800; line-height:1.02; letter-spacing:-2px;
+  margin-bottom:22px;
+}
+.hero h1 .grad {
+  background:linear-gradient(135deg, #c084fc 0%, #7c3aed 50%, #ec4899 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.hero h1 .line2 { display:block; color:var(--text); }
+
+.hero p {
+  font-size:17px; color:var(--muted2); line-height:1.75;
+  max-width:460px; margin-bottom:36px;
+}
+
+.hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
+
+.btn-main {
+  display:inline-flex; align-items:center; gap:10px;
+  background:linear-gradient(135deg, var(--purple), var(--purple2));
+  color:#fff; font-weight:700; font-size:15px;
+  padding:14px 28px; border-radius:14px; text-decoration:none;
+  border:none; cursor:pointer;
+  transition:all 0.25s;
+  box-shadow:0 4px 24px rgba(124,58,237,0.35);
+}
+.btn-main:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(124,58,237,0.5); }
+
+.btn-ghost {
+  display:inline-flex; align-items:center; gap:10px;
+  background:transparent; color:var(--text);
+  font-weight:600; font-size:15px;
+  padding:14px 28px; border-radius:14px; text-decoration:none;
+  border:1.5px solid var(--border2); cursor:pointer;
+  transition:all 0.25s;
+}
+.btn-ghost:hover { border-color:var(--purple); color:var(--purple3); }
+
+/* STATS */
+.hero-stats {
+  display:flex; gap:32px; margin-top:48px; flex-wrap:wrap;
+}
+.hstat { }
+.hstat-n {
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:30px; font-weight:800;
+  background:linear-gradient(135deg,var(--purple3),var(--pink));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.hstat-l { font-size:12px; color:var(--muted); margin-top:2px; font-weight:500; }
+
+/* HERO CARD */
+.hero-right { flex:0 0 380px; }
+@media(max-width:900px){ .hero-right { width:100%; flex:none; } }
+
+.hero-card {
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:24px; padding:28px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(124,58,237,0.1);
+  position:relative; overflow:hidden;
+}
+.hero-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, var(--purple), var(--pink), var(--purple2));
+}
+
+.hcard-title {
+  font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  color:var(--muted); margin-bottom:18px;
+}
+.hcard-cats { display:flex; flex-direction:column; gap:10px; }
+.hcat {
+  display:flex; align-items:center; gap:14px;
+  background:var(--card2); border:1px solid var(--border);
+  border-radius:14px; padding:14px 16px;
+  cursor:pointer; transition:all 0.2s;
+  text-decoration:none; color:var(--text);
+}
+.hcat:hover { border-color:var(--purple); background:rgba(124,58,237,0.08); transform:translateX(4px); }
+.hcat-icon { font-size:26px; width:40px; text-align:center; }
+.hcat-info { flex:1; }
+.hcat-name { font-weight:700; font-size:14px; }
+.hcat-desc { font-size:12px; color:var(--muted); margin-top:2px; }
+.hcat-arrow { color:var(--muted); font-size:18px; transition:color 0.2s; }
+.hcat:hover .hcat-arrow { color:var(--purple3); }
+
+/* SECTION */
+.section { position:relative; z-index:1; padding:80px 48px; max-width:1200px; margin:0 auto; }
+@media(max-width:768px){ .section { padding:60px 24px; } }
+
+.sec-label {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  color:var(--purple3); margin-bottom:12px;
+}
+.sec-label::before { content:''; width:24px; height:2px; background:var(--purple); border-radius:2px; }
+
+.sec-h {
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:clamp(28px,4vw,46px); font-weight:800;
+  letter-spacing:-1.5px; margin-bottom:10px; line-height:1.1;
+}
+.sec-sub { font-size:15px; color:var(--muted2); line-height:1.7; margin-bottom:44px; max-width:560px; }
+
+/* CATEGORY TABS */
+.cat-tabs {
+  display:flex; gap:8px; margin-bottom:32px; flex-wrap:wrap;
+}
+.cat-tab {
+  display:flex; align-items:center; gap:8px;
+  padding:10px 20px; border-radius:100px;
+  background:var(--card); border:1.5px solid var(--border);
+  font-size:13px; font-weight:600; color:var(--muted2);
+  cursor:pointer; transition:all 0.2s;
+}
+.cat-tab:hover { border-color:var(--purple); color:var(--purple3); }
+.cat-tab.active {
+  background:linear-gradient(135deg,var(--purple),var(--purple2));
+  border-color:transparent; color:#fff;
+  box-shadow:0 4px 16px rgba(124,58,237,0.3);
+}
+
+/* PRODUCT GRID */
+.prod-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+  gap:18px;
+}
+
+.prod-card {
+  background:var(--card); border:1.5px solid var(--border);
+  border-radius:20px; padding:22px;
+  cursor:pointer; transition:all 0.22s cubic-bezier(.4,0,.2,1);
+  position:relative; overflow:hidden;
+}
+.prod-card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(124,58,237,0.05), transparent);
+  opacity:0; transition:opacity 0.2s;
+}
+.prod-card:hover { border-color:var(--purple); transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(124,58,237,0.15); }
+.prod-card:hover::before { opacity:1; }
+.prod-card.selected { border-color:var(--purple2); background:rgba(124,58,237,0.08); }
+.prod-card.selected::after {
+  content:'✓'; position:absolute; top:14px; right:14px;
+  width:26px; height:26px; border-radius:50%;
+  background:linear-gradient(135deg,var(--purple),var(--purple2));
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:800; color:#fff;
+}
+
+.prod-cat-tag {
+  display:inline-flex; align-items:center; gap:5px;
+  font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  padding:4px 10px; border-radius:100px; margin-bottom:14px;
+}
+.tag-streaming { background:rgba(236,72,153,0.12); color:#f472b6; border:1px solid rgba(236,72,153,0.2); }
+.tag-pulsa { background:rgba(34,211,160,0.1); color:var(--green); border:1px solid rgba(34,211,160,0.2); }
+.tag-game { background:rgba(245,158,11,0.1); color:var(--gold); border:1px solid rgba(245,158,11,0.2); }
+.tag-jasa { background:rgba(124,58,237,0.12); color:var(--purple3); border:1px solid rgba(124,58,237,0.2); }
+
+.prod-icon { font-size:36px; margin-bottom:12px; display:block; }
+.prod-name { font-family:'Cabinet Grotesk',sans-serif; font-size:18px; font-weight:800; margin-bottom:6px; letter-spacing:-0.3px; }
+.prod-desc { font-size:13px; color:var(--muted2); line-height:1.6; margin-bottom:16px; }
+.prod-feats { display:flex; flex-direction:column; gap:5px; margin-bottom:18px; }
+.prod-feat {
+  display:flex; align-items:center; gap:8px;
+  font-size:12px; color:var(--muted2);
+}
+.feat-ic { font-size:11px; color:var(--green); }
+
+.prod-price-row { display:flex; align-items:baseline; justify-content:space-between; }
+.prod-price {
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:22px; font-weight:800;
+  background:linear-gradient(135deg,var(--purple3),var(--pink));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.prod-from { font-size:11px; color:var(--muted); }
+.prod-badge-hot {
+  font-size:10px; font-weight:700;
+  background:rgba(236,72,153,0.15); color:var(--pink);
+  border:1px solid rgba(236,72,153,0.25);
+  padding:3px 9px; border-radius:100px;
+}
+.prod-badge-pop {
+  font-size:10px; font-weight:700;
+  background:rgba(245,158,11,0.12); color:var(--gold);
+  border:1px solid rgba(245,158,11,0.2);
+  padding:3px 9px; border-radius:100px;
+}
+
+/* DIVIDER */
+.full-divider { border:none; border-top:1px solid var(--border); margin:0; }
+
+/* ORDER SECTION */
+.order-wrap {
+  display:grid; grid-template-columns:1fr 380px; gap:32px; align-items:start;
+}
+@media(max-width:900px){ .order-wrap { grid-template-columns:1fr; } }
+
+.order-form-box {
+  background:var(--card); border:1.5px solid var(--border2);
+  border-radius:24px; padding:36px; position:relative; overflow:hidden;
+}
+.order-form-box::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--purple), var(--pink), var(--purple2));
+}
+
+.sel-info {
+  display:none; align-items:center; gap:12px;
+  background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.2);
+  border-radius:12px; padding:12px 16px; margin-bottom:22px;
+  font-size:14px; color:var(--purple3);
+}
+.sel-info.show { display:flex; }
+.sel-info strong { color:var(--text); }
+
+.form2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+@media(max-width:560px){ .form2 { grid-template-columns:1fr; } }
+.fg { display:flex; flex-direction:column; gap:8px; }
+.fg.full { grid-column:1/-1; }
+
+label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+input, select, textarea {
+  background:#0c0c1c; border:1.5px solid var(--border);
+  border-radius:12px; padding:13px 16px;
+  font-family:'Cabinet Grotesk',sans-serif; font-size:15px; color:var(--text);
+  outline:none; transition:border-color 0.2s;
+}
+input::placeholder { color:var(--muted); }
+input:focus, select:focus, textarea:focus { border-color:var(--purple2); }
+select option { background:#0d0d1a; }
+textarea { resize:vertical; min-height:90px; }
+
+/* ORDER SIDEBAR */
+.order-sidebar { display:flex; flex-direction:column; gap:16px; }
+
+.summary-box {
+  background:var(--card2); border:1.5px solid var(--border2);
+  border-radius:20px; padding:24px; position:sticky; top:90px;
+}
+.sum-title { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:18px; }
+.sum-row { display:flex; justify-content:space-between; align-items:flex-start; padding:9px 0; border-bottom:1px solid var(--border); font-size:14px; }
+.sum-row:last-of-type { border:none; }
+.sum-lbl { color:var(--muted2); }
+.sum-val { text-align:right; color:var(--text); font-weight:600; max-width:180px; font-size:13px; }
+.sum-total {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 0 0; margin-top:8px; border-top:1.5px solid var(--border2);
+}
+.sum-total-lbl { font-size:14px; font-weight:700; color:var(--muted2); }
+.sum-total-val {
+  font-family:'Cabinet Grotesk',sans-serif; font-size:26px; font-weight:800;
+  background:linear-gradient(135deg,var(--purple3),var(--pink));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+
+/* BUTTONS */
+.btn-order {
+  width:100%; padding:16px; border:none; border-radius:14px;
+  background:linear-gradient(135deg,var(--purple),var(--purple2));
+  color:#fff; font-family:'Cabinet Grotesk',sans-serif;
+  font-size:16px; font-weight:800; letter-spacing:-0.3px;
+  cursor:pointer; transition:all 0.25s;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  box-shadow:0 4px 24px rgba(124,58,237,0.35);
+  margin-top:20px;
+}
+.btn-order:hover { transform:translateY(-2px); box-shadow:0 8px 36px rgba(124,58,237,0.55); }
+.btn-order:disabled { opacity:0.4; cursor:not-allowed; transform:none; }
+
+.btn-wa-show {
+  width:100%; padding:15px; border:none; border-radius:14px;
+  background:#25D366; color:#fff;
+  font-family:'Cabinet Grotesk',sans-serif; font-size:15px; font-weight:800;
+  cursor:pointer; transition:all 0.2s;
+  display:none; align-items:center; justify-content:center; gap:10px;
+  margin-top:10px; text-decoration:none;
+}
+.btn-wa-show.show { display:flex; }
+.btn-wa-show:hover { background:#1db954; transform:translateY(-2px); }
+.btn-wa-show svg { width:20px; height:20px; fill:white; }
+
+/* SUCCESS */
+.success-box {
+  display:none; text-align:center;
+  background:rgba(34,211,160,0.05); border:1.5px solid rgba(34,211,160,0.2);
+  border-radius:16px; padding:28px; margin-top:20px;
+}
+.success-box.show { display:block; animation:popIn 0.35s ease; }
+@keyframes popIn { from{opacity:0;transform:scale(0.95)} to{opacity:1;transform:none} }
+.success-emoji { font-size:48px; margin-bottom:12px; }
+.success-box h3 { font-family:'Cabinet Grotesk',sans-serif; font-size:20px; font-weight:800; color:var(--green); margin-bottom:8px; }
+.success-box p { font-size:14px; color:var(--muted2); line-height:1.7; }
+
+/* TRUST BADGES */
+.trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+@media(max-width:768px){ .trust-grid { grid-template-columns:repeat(2,1fr); } }
+.trust-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:18px; padding:24px; text-align:center;
+  transition:border-color 0.2s;
+}
+.trust-card:hover { border-color:var(--purple); }
+.trust-icon { font-size:32px; margin-bottom:12px; }
+.trust-card h4 { font-weight:800; font-size:15px; margin-bottom:6px; }
+.trust-card p { font-size:13px; color:var(--muted2); line-height:1.6; }
+
+/* TESTIMONIALS */
+.testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+@media(max-width:768px){ .testi-grid { grid-template-columns:1fr; } }
+.testi-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:18px; padding:22px;
+}
+.testi-top { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.testi-av {
+  width:40px; height:40px; border-radius:50%;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; font-weight:800; color:#fff;
+  font-family:'Cabinet Grotesk',sans-serif;
+}
+.testi-name { font-weight:700; font-size:14px; }
+.testi-prod { font-size:12px; color:var(--muted); }
+.testi-stars { color:var(--gold); font-size:13px; margin-bottom:10px; }
+.testi-text { font-size:14px; color:var(--muted2); line-height:1.7; }
+
+/* FAQ */
+.faq-wrap { max-width:720px; display:flex; flex-direction:column; gap:10px; }
+.faq-item {
+  background:var(--card); border:1.5px solid var(--border);
+  border-radius:16px; overflow:hidden; cursor:pointer;
+  transition:border-color 0.2s;
+}
+.faq-item:hover, .faq-item.open { border-color:var(--purple); }
+.faq-q { display:flex; justify-content:space-between; align-items:center; padding:18px 22px; font-weight:700; font-size:15px; }
+.faq-ic { font-size:20px; color:var(--purple3); transition:transform 0.25s; }
+.faq-item.open .faq-ic { transform:rotate(45deg); }
+.faq-a { display:none; padding:0 22px 18px; font-size:14px; color:var(--muted2); line-height:1.75; }
+.faq-item.open .faq-a { display:block; }
+
+/* FOOTER */
+footer {
+  position:relative; z-index:1;
+  background:var(--bg2); border-top:1px solid var(--border);
+  padding:60px 48px 30px;
+}
+@media(max-width:768px){ footer { padding:40px 24px 24px; } }
+.footer-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:48px; margin-bottom:48px; }
+@media(max-width:768px){ .footer-grid { grid-template-columns:1fr; gap:32px; } }
+.f-logo {
+  font-family:'Cabinet Grotesk',sans-serif; font-size:28px; font-weight:800;
+  background:linear-gradient(135deg,var(--purple3),var(--pink));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:12px;
+}
+.f-desc { font-size:14px; color:var(--muted2); line-height:1.75; margin-bottom:20px; }
+.f-cs-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  background:#25D366; color:#fff; font-weight:700; font-size:14px;
+  padding:11px 22px; border-radius:12px; text-decoration:none;
+  transition:all 0.2s;
+}
+.f-cs-btn:hover { background:#1db954; }
+.f-col-title { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:18px; }
+.f-links { display:flex; flex-direction:column; gap:10px; }
+.f-links a { font-size:14px; color:var(--muted2); text-decoration:none; transition:color 0.2s; }
+.f-links a:hover { color:var(--purple3); }
+.f-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:24px; border-top:1px solid var(--border); font-size:13px; color:var(--muted); flex-wrap:wrap; gap:12px; }
+
+/* CS WIDGET */
+.cs-wrap { position:fixed; bottom:24px; right:24px; z-index:9999; }
+.cs-toggle-btn {
+  width:58px; height:58px; border-radius:50%; border:none;
+  background:linear-gradient(135deg,var(--purple),var(--purple2));
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 28px rgba(124,58,237,0.5); transition:all 0.2s; position:relative;
+}
+.cs-toggle-btn:hover { transform:scale(1.08); }
+.cs-toggle-btn svg { width:26px; height:26px; fill:white; }
+.cs-badge-dot {
+  position:absolute; top:-2px; right:-2px;
+  width:18px; height:18px; border-radius:50%;
+  background:#ef4444; color:#fff; font-size:10px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+  border:2px solid var(--bg); animation:pulse-red 2s infinite;
+}
+@keyframes pulse-red { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.4)} 50%{box-shadow:0 0 0 6px rgba(239,68,68,0)} }
+
+.cs-popup-box {
+  display:none; position:absolute; bottom:70px; right:0;
+  width:310px; background:var(--card);
+  border:1.5px solid var(--border2); border-radius:22px;
+  overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.5);
+  animation:slideUp 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.cs-popup-box.open { display:block; }
+@keyframes slideUp { from{opacity:0;transform:scale(0.85) translateY(12px)} to{opacity:1;transform:none} }
+
+.cs-pop-head {
+  background:linear-gradient(135deg,var(--purple),var(--purple2));
+  padding:20px; display:flex; align-items:center; gap:12px;
+}
+.cs-pop-av {
+  width:44px; height:44px; border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  display:flex; align-items:center; justify-content:center; font-size:22px;
+}
+.cs-pop-name { font-weight:800; font-size:15px; color:#fff; }
+.cs-pop-status { font-size:11px; color:rgba(255,255,255,0.75); display:flex; align-items:center; gap:5px; margin-top:2px; }
+.online-pulse { width:7px; height:7px; background:#4ade80; border-radius:50%; animation:blink 1.4s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.cs-pop-body { padding:18px; }
+.cs-pop-msg {
+  background:var(--card2); border:1px solid var(--border);
+  border-radius:12px; padding:12px 14px;
+  font-size:13px; color:var(--text); line-height:1.65; margin-bottom:14px;
+}
+.cs-pop-actions { display:flex; flex-direction:column; gap:8px; }
+.cs-pop-act {
+  display:flex; align-items:center; gap:10px;
+  padding:11px 14px; border-radius:12px; font-size:13px; font-weight:600;
+  text-decoration:none; transition:all 0.18s;
+  color:var(--text); background:var(--card2); border:1.5px solid var(--border);
+}
+.cs-pop-act:hover { border-color:var(--purple); color:var(--purple3); }
+.cs-pop-act.primary { background:linear-gradient(135deg,var(--purple),var(--purple2)); border-color:transparent; color:#fff; }
+.cs-pop-act.primary:hover { opacity:0.9; }
+.cs-pop-act svg { width:16px; height:16px; fill:currentColor; }
+.cs-pop-foot { padding:12px 18px; border-top:1px solid var(--border); text-align:center; font-size:11px; color:var(--muted); }
+.cs-pop-foot strong { color:var(--purple3); }
+
+/* HIDDEN CAT SECTIONS */
+.cat-section { display:none; }
+.cat-section.active { display:block; }
+
+/* ANIMATE IN */
+@keyframes fadeUp2 { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+.fade-up { animation:fadeUp2 0.5s ease both; }
+</style>
+</head>
+<body>
+
+<div class="ambient amb1"></div>
+<div class="ambient amb2"></div>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="logo">YELL</div>
+    <span class="logo-tag">Digital Store</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#katalog">Katalog</a></li>
+    <li><a href="#order">Order</a></li>
+    <li><a href="#tentang">Keunggulan</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://wa.me/6285124706417?text=Halo+YELL%2C+mau+order" target="_blank" class="header-cta">
+    💬 Chat CS
+  </a>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-pill">
+      <div class="pill-dot">⚡</div>
+      <span class="pill-text">Auto Proses — Langsung Jadi</span>
+    </div>
+    <h1>
+      <span class="grad">Toko Digital</span>
+      <span class="line2">Terpercaya &</span>
+      <span class="grad">Terjangkau</span>
+    </h1>
+    <p>Streaming, pulsa, voucher game, sampai jasa bikin website — semua ada di YELL. Harga terbaik, proses kilat, CS siap 24/7.</p>
+    <div class="hero-btns">
+      <a href="#katalog" class="btn-main">🛒 Lihat Katalog</a>
+      <a href="#order" class="btn-ghost">📋 Order Sekarang</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n">10.000+</div><div class="hstat-l">Transaksi Sukses</div></div>
+      <div class="hstat"><div class="hstat-n">4.9★</div><div class="hstat-l">Rating Pembeli</div></div>
+      <div class="hstat"><div class="hstat-n">< 5 Min</div><div class="hstat-l">Proses Order</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hcard-title">Kategori Produk</div>
+      <div class="hcard-cats">
+        <a href="#katalog" class="hcat" onclick="switchTab('streaming')">
+          <div class="hcat-icon">🎬</div>
+          <div class="hcat-info"><div class="hcat-name">Akun Streaming</div><div class="hcat-desc">Netflix, Spotify, Disney+, dll</div></div>
+          <div class="hcat-arrow">›</div>
+        </a>
+        <a href="#katalog" class="hcat" onclick="switchTab('pulsa')">
+          <div class="hcat-icon">📱</div>
+          <div class="hcat-info"><div class="hcat-name">Pulsa & Data</div><div class="hcat-desc">Semua operator, harga murah</div></div>
+          <div class="hcat-arrow">›</div>
+        </a>
+        <a href="#katalog" class="hcat" onclick="switchTab('game')">
+          <div class="hcat-icon">🎮</div>
+          <div class="hcat-info"><div class="hcat-name">Voucher Game</div><div class="hcat-desc">ML, FF, PUBG, Valorant, dll</div></div>
+          <div class="hcat-arrow">›</div>
+        </a>
+        <a href="#katalog" class="hcat" onclick="switchTab('jasa')">
+          <div class="hcat-icon">💻</div>
+          <div class="hcat-info"><div class="hcat-name">Jasa Website</div><div class="hcat-desc">Landing page, toko online, dll</div></div>
+          <div class="hcat-arrow">›</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="full-divider">
+
+<!-- TRUST -->
+<div class="section" id="tentang">
+  <p class="sec-label">Keunggulan YELL</p>
+  <h2 class="sec-h">Kenapa Pilih Kami?</h2>
+  <p class="sec-sub">Ribuan pembeli sudah percaya. Ini alasannya.</p>
+  <div class="trust-grid">
+    <div class="trust-card"><div class="trust-icon">⚡</div><h4>Proses Kilat</h4><p>Order langsung diproses dalam hitungan menit, tidak perlu nunggu lama.</p></div>
+    <div class="trust-card"><div class="trust-icon">💰</div><h4>Harga Terbaik</h4><p>Harga kompetitif, bisa nego untuk order dalam jumlah banyak.</p></div>
+    <div class="trust-card"><div class="trust-icon">🛡️</div><h4>Bergaransi</h4><p>Semua produk bergaransi. Bermasalah? Kami ganti atau refund.</p></div>
+    <div class="trust-card"><div class="trust-icon">🎧</div><h4>CS 24/7</h4><p>Tim CS YELL aktif setiap hari via WhatsApp. Respons cepat!</p></div>
+  </div>
+</div>
+
+<hr class="full-divider">
+
+<!-- KATALOG -->
+<div class="section" id="katalog">
+  <p class="sec-label">Katalog Produk</p>
+  <h2 class="sec-h">Semua Ada di YELL</h2>
+  <p class="sec-sub">Pilih kategori, klik produk, lanjut order. Semudah itu!</p>
+
+  <div class="cat-tabs">
+    <div class="cat-tab active" onclick="switchTab('streaming')">🎬 Streaming</div>
+    <div class="cat-tab" onclick="switchTab('pulsa')">📱 Pulsa & Data</div>
+    <div class="cat-tab" onclick="switchTab('game')">🎮 Voucher Game</div>
+    <div class="cat-tab" onclick="switchTab('jasa')">💻 Jasa Website</div>
+  </div>
+
+  <!-- STREAMING -->
+  <div class="cat-section active" id="sec-streaming">
+    <div class="prod-grid">
+      <div class="prod-card" onclick="pilih(this,'Netflix Premium (Private)',45000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-streaming">🎬 Streaming</div>
+        <span class="prod-icon">🎥</span>
+        <div class="prod-name">Netflix Premium</div>
+        <div class="prod-desc">Akun private 1 bulan, 4K UHD, 4 layar, garansi penuh.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Akun private (bukan sharing)</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Resolusi 4K Ultra HD</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Garansi 30 hari</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 45.000</div></div><span class="prod-badge-hot">🔥 HOT</span></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Spotify Premium (1 Bulan)',15000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-streaming">🎵 Streaming</div>
+        <span class="prod-icon">🎵</span>
+        <div class="prod-name">Spotify Premium</div>
+        <div class="prod-desc">Musik tanpa iklan, download offline, kualitas suara tinggi.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Tanpa iklan</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Download offline</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Garansi 30 hari</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 15.000</div></div><span class="prod-badge-pop">⭐ POPULER</span></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Disney+ Hotstar (1 Bulan)',25000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-streaming">🎬 Streaming</div>
+        <span class="prod-icon">🏰</span>
+        <div class="prod-name">Disney+ Hotstar</div>
+        <div class="prod-desc">Nonton Marvel, Star Wars, Disney, dan konten Hotstar original.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Konten Marvel & Disney</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Resolusi FHD</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Garansi 30 hari</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 25.000</div></div></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'YouTube Premium (1 Bulan)',20000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-streaming">▶️ Streaming</div>
+        <span class="prod-icon">▶️</span>
+        <div class="prod-name">YouTube Premium</div>
+        <div class="prod-desc">YouTube tanpa iklan, background play, dan YouTube Music gratis.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Tanpa iklan</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Background play</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> YouTube Music included</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 20.000</div></div></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Vidio Premier (1 Bulan)',18000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-streaming">📺 Streaming</div>
+        <span class="prod-icon">📺</span>
+        <div class="prod-name">Vidio Premier</div>
+        <div class="prod-desc">Siaran Liga Inggris, film lokal, drama, dan konten original Vidio.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Live EPL & Liga Champion</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Ribuan konten lokal</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Garansi 30 hari</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 18.000</div></div></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Canva Pro (1 Bulan)',25000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-streaming">🎨 Desain</div>
+        <span class="prod-icon">🎨</span>
+        <div class="prod-name">Canva Pro</div>
+        <div class="prod-desc">Akses ribuan template premium, background remover, dan fitur brand kit.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Template premium unlimited</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Background remover</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Garansi 30 hari</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 25.000</div></div><span class="prod-badge-pop">⭐ POPULER</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PULSA -->
+  <div class="cat-section" id="sec-pulsa">
+    <div class="prod-grid">
+      <div class="prod-card" onclick="pilih(this,'Pulsa Telkomsel',10000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-pulsa">📱 Pulsa</div>
+        <span class="prod-icon">🔴</span>
+        <div class="prod-name">Pulsa Telkomsel</div>
+        <div class="prod-desc">Isi ulang pulsa Telkomsel (Simpati, AS, Loop) semua nominal.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Semua nominal tersedia</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Proses otomatis < 2 menit</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Harga kompetitif</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 10.000</div></div><span class="prod-badge-hot">🔥 HOT</span></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Paket Data Telkomsel',15000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-pulsa">📶 Data</div>
+        <span class="prod-icon">🌐</span>
+        <div class="prod-name">Paket Data Telkomsel</div>
+        <div class="prod-desc">Paket data Telkomsel harian, mingguan, dan bulanan semua tersedia.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> 1GB s/d 50GB</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Jaringan 4G/5G</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Proses kilat</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 15.000</div></div></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Pulsa Indosat / IM3',10000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-pulsa">📱 Pulsa</div>
+        <span class="prod-icon">🟡</span>
+        <div class="prod-name">Pulsa Indosat</div>
+        <div class="prod-desc">Isi ulang pulsa Indosat Ooredoo & IM3 semua nominal.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Semua nominal tersedia</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Proses otomatis</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Harga bersaing</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 10.000</div></div></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Paket Data XL / Axis',12000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-pulsa">📶 Data</div>
+        <span class="prod-icon">🔵</span>
+        <div class="prod-name">Paket Data XL / Axis</div>
+        <div class="prod-desc">Paket data XL dan Axis terlengkap, mulai 1GB hingga unlimited.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> XL & Axis semua paket</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Termasuk paket malam</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Langsung aktif</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 12.000</div></div></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Token Listrik PLN',20000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-pulsa">⚡ Listrik</div>
+        <span class="prod-icon">⚡</span>
+        <div class="prod-name">Token Listrik PLN</div>
+        <div class="prod-desc">Token listrik PLN prabayar semua nominal, proses otomatis cepat.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Rp 20rb s/d Rp 1jt</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Token langsung dikirim</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Proses < 3 menit</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 20.000</div></div><span class="prod-badge-pop">⭐ POPULER</span></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Paket Data Smartfren',10000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-pulsa">📶 Data</div>
+        <span class="prod-icon">🟢</span>
+        <div class="prod-name">Paket Data Smartfren</div>
+        <div class="prod-desc">Paket data Smartfren murah meriah, cocok buat streaming dan gaming.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Paket harian & bulanan</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> 4G LTE</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Proses kilat</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 10.000</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME -->
+  <div class="cat-section" id="sec-game">
+    <div class="prod-grid">
+      <div class="prod-card" onclick="pilih(this,'Diamond Mobile Legends',15000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-game">🎮 Game</div>
+        <span class="prod-icon">⚔️</span>
+        <div class="prod-name">Diamond ML</div>
+        <div class="prod-desc">Top up diamond Mobile Legends langsung ke ID kamu, semua nominal.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Semua nominal (11 s/d 5000 DM)</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Proses < 5 menit</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Tanpa login akun</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 15.000</div></div><span class="prod-badge-hot">🔥 HOT</span></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Diamond Free Fire',10000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-game">🎮 Game</div>
+        <span class="prod-icon">🔥</span>
+        <div class="prod-name">Diamond Free Fire</div>
+        <div class="prod-desc">Top up diamond Free Fire / FF MAX semua nominal cepat & aman.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> 70 DM s/d 5600 DM</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Langsung ke ID FF</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Harga murah</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 10.000</div></div><span class="prod-badge-pop">⭐ POPULER</span></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'UC PUBG Mobile',18000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-game">🎮 Game</div>
+        <span class="prod-icon">🪖</span>
+        <div class="prod-name">UC PUBG Mobile</div>
+        <div class="prod-desc">Top up Unknown Cash PUBG Mobile semua nominal, proses kilat.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> 60 UC s/d 8100 UC</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Langsung ke akun PUBG</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Harga terjangkau</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 18.000</div></div></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'VP Valorant / Riot Points',25000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-game">🎮 Game</div>
+        <span class="prod-icon">🎯</span>
+        <div class="prod-name">VP Valorant</div>
+        <div class="prod-desc">Top up Valorant Points (VP) untuk beli skin, battle pass, dll.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> 475 VP s/d 11000 VP</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Proses cepat & aman</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Bisa request nominal</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 25.000</div></div></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Google Play Gift Card',15000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-game">🎁 Gift Card</div>
+        <span class="prod-icon">🎁</span>
+        <div class="prod-name">Google Play Card</div>
+        <div class="prod-desc">Gift card Google Play untuk beli app, game, atau top up in-app.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Nominal Rp 15rb–Rp 500rb</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Kode dikirim via WA</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Langsung bisa dipakai</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 15.000</div></div></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Genshin Impact Genesis Crystal',20000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-game">🎮 Game</div>
+        <span class="prod-icon">💎</span>
+        <div class="prod-name">Genshin Impact</div>
+        <div class="prod-desc">Top up Genesis Crystal Genshin Impact semua server & nominal.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Semua server (Asia, NA, EU)</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Proses < 5 menit</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Aman & terpercaya</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 20.000</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JASA -->
+  <div class="cat-section" id="sec-jasa">
+    <div class="prod-grid">
+      <div class="prod-card" onclick="pilih(this,'Jasa Bikin Landing Page',150000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-jasa">💻 Website</div>
+        <span class="prod-icon">🖥️</span>
+        <div class="prod-name">Landing Page</div>
+        <div class="prod-desc">Website 1 halaman profesional cocok untuk jualan, promosi, atau portofolio.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Desain modern & responsif</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Tombol WA & order terintegrasi</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Selesai 1–2 hari kerja</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 150.000</div></div><span class="prod-badge-hot">🔥 HOT</span></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Jasa Bikin Toko Online',250000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-jasa">🛒 Website</div>
+        <span class="prod-icon">🛒</span>
+        <div class="prod-name">Toko Online</div>
+        <div class="prod-desc">Website toko online lengkap dengan katalog produk dan fitur order.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Katalog produk lengkap</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Sistem order & CS terintegrasi</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Selesai 3–5 hari kerja</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 250.000</div></div><span class="prod-badge-pop">⭐ RECOMMENDED</span></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Jasa Bikin Company Profile',200000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-jasa">🏢 Website</div>
+        <span class="prod-icon">🏢</span>
+        <div class="prod-name">Company Profile</div>
+        <div class="prod-desc">Website profil perusahaan yang elegan dan profesional untuk bisnis kamu.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Multi-halaman (About, Service, Contact)</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Desain premium</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Selesai 3–5 hari kerja</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 200.000</div></div></div>
+      </div>
+      <div class="prod-card" onclick="pilih(this,'Jasa Revisi / Edit Website',75000)">
+        <div class="check-mark">✓</div>
+        <div class="prod-cat-tag tag-jasa">✏️ Jasa</div>
+        <span class="prod-icon">✏️</span>
+        <div class="prod-name">Revisi Website</div>
+        <div class="prod-desc">Punya website tapi mau diperbarui? Kami bantu edit, redesign, atau tambah fitur.</div>
+        <div class="prod-feats">
+          <div class="prod-feat"><span class="feat-ic">✓</span> Edit konten & desain</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Tambah fitur baru</div>
+          <div class="prod-feat"><span class="feat-ic">✓</span> Selesai 1–2 hari kerja</div>
+        </div>
+        <div class="prod-price-row"><div><div class="prod-from">Mulai dari</div><div class="prod-price">Rp 75.000</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="full-divider">
+
+<!-- ORDER -->
+<div class="section" id="order">
+  <p class="sec-label">Pemesanan</p>
+  <h2 class="sec-h">Form Auto Order</h2>
+  <p class="sec-sub">Pilih produk di atas, isi data, pesanan langsung dikirim ke CS YELL via WhatsApp!</p>
+
+  <div class="order-wrap">
+    <div class="order-form-box">
+      <div class="sel-info" id="selInfo">
+        <span>🛒</span>
+        <div>Produk dipilih: <strong id="selNama">—</strong></div>
+      </div>
+
+      <div class="form2">
+        <div class="fg"><label>Nama Lengkap</label><input type="text" id="fNama" placeholder="Nama kamu..."/></div>
+        <div class="fg"><label>Nomor WhatsApp</label><input type="text" id="fWA" placeholder="08xxxxxxxxxx"/></div>
+      </div>
+      <div class="form2">
+        <div class="fg"><label>Metode Pembayaran</label>
+          <select id="fBayar">
+            <option value="">— Pilih —</option>
+            <option>GoPay</option><option>OVO</option><option>DANA</option>
+            <option>ShopeePay</option><option>QRIS</option>
+            <option>Transfer BCA</option><option>Transfer BRI</option>
+            <option>Transfer Mandiri</option>
+          </select>
+        </div>
+        <div class="fg" id="extraFieldWrap"><label id="extraLabel">ID / Info Tambahan</label><input type="text" id="fExtra" placeholder="Isi jika diperlukan..."/></div>
+      </div>
+      <div class="form2">
+        <div class="fg full"><label>Catatan (opsional)</label><input type="text" id="fNote" placeholder="Contoh: nominal tertentu, request khusus, dll."/></div>
+      </div>
+
+      <button class="btn-order" id="btnOrder" onclick="kirim()">⚡ Pesan Sekarang via WhatsApp</button>
+      <a id="btnWA" href="#" class="btn-wa-show" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Buka WhatsApp CS
+      </a>
+      <div class="success-box" id="successBox">
+        <div class="success-emoji">🎉</div>
+        <h3>Pesanan Terkirim!</h3>
+        <p>CS YELL akan segera membalas dan memproses pesanan kamu. Biasanya kurang dari 5 menit!</p>
+      </div>
+    </div>
+
+    <div class="order-sidebar">
+      <div class="summary-box">
+        <div class="sum-title">Ringkasan Pesanan</div>
+        <div class="sum-row"><span class="sum-lbl">Produk</span><span class="sum-val" id="sProd">Belum dipilih</span></div>
+        <div class="sum-row"><span class="sum-lbl">Kategori</span><span class="sum-val" id="sCat">—</span></div>
+        <div class="sum-row"><span class="sum-lbl">Pembayaran</span><span class="sum-val" id="sBayar">—</span></div>
+        <div class="sum-total">
+          <span class="sum-total-lbl">Total</span>
+          <span class="sum-total-val" id="sTotal">Rp —</span>
+        </div>
+        <button class="btn-order" style="margin-top:18px" onclick="kirim()">⚡ Order Sekarang</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="full-divider">
+
+<!-- TESTIMONIALS -->
+<div class="section">
+  <p class="sec-label">Testimoni</p>
+  <h2 class="sec-h">Kata Mereka</h2>
+  <p class="sec-sub">Ribuan pembeli sudah puas. Ini kata mereka tentang YELL.</p>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-top"><div class="testi-av">R</div><div><div class="testi-name">Rizky A.</div><div class="testi-prod">Netflix Premium</div></div></div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">Beli Netflix langsung jadi dalam 3 menit. CS-nya fast respon banget. Udah langganan di sini dari 6 bulan lalu!</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-top"><div class="testi-av" style="background:linear-gradient(135deg,#ec4899,#f59e0b)">S</div><div><div class="testi-name">Siti N.</div><div class="testi-prod">Diamond ML</div></div></div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">Top up diamond ML cepet banget, langsung masuk sebelum game selesai loading 😂 Harganya juga murah dari yang lain!</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-top"><div class="testi-av" style="background:linear-gradient(135deg,#22d3a0,#3b82f6)">D</div><div><div class="testi-name">Danu P.</div><div class="testi-prod">Jasa Landing Page</div></div></div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">Pesan website buat jualan online, hasilnya keren banget dan selesai cuma 1 hari! Recommended banget buat yang mau bikin web.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="full-divider">
+
+<!-- FAQ -->
+<div class="section" id="faq">
+  <p class="sec-label">FAQ</p>
+  <h2 class="sec-h">Pertanyaan Umum</h2>
+  <div class="faq-wrap">
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Berapa lama proses order? <span class="faq-ic">+</span></div>
+      <div class="faq-a">Rata-rata proses hanya <strong>2–5 menit</strong> setelah pembayaran dikonfirmasi. Untuk jasa website biasanya 1–5 hari kerja tergantung paket yang dipilih.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Apakah ada garansi produk? <span class="faq-ic">+</span></div>
+      <div class="faq-a">Ya! Semua produk digital (streaming, pulsa, voucher game) bergaransi. Jika ada masalah dalam 24 jam, kami ganti atau refund penuh.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Metode pembayaran apa saja yang diterima? <span class="faq-ic">+</span></div>
+      <div class="faq-a">Kami menerima GoPay, OVO, DANA, ShopeePay, QRIS, dan transfer bank (BCA, BRI, Mandiri).</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Bisa minta nota / bukti transaksi? <span class="faq-ic">+</span></div>
+      <div class="faq-a">Tentu! Kami selalu mengirimkan bukti transaksi via WhatsApp setelah order selesai diproses.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Apakah CS aktif 24 jam? <span class="faq-ic">+</span></div>
+      <div class="faq-a">CS YELL aktif setiap hari dari pagi hingga malam. Untuk malam hari, balasan mungkin sedikit lebih lambat namun tetap diproses.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Bisa order dalam jumlah banyak / reseller? <span class="faq-ic">+</span></div>
+      <div class="faq-a">Bisa banget! Hubungi CS kami untuk mendapatkan harga spesial reseller dan harga grosir untuk order dalam jumlah banyak.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="f-logo">YELL</div>
+      <p class="f-desc">Toko digital terpercaya untuk streaming, pulsa, voucher game, dan jasa website. Harga terbaik, proses kilat, CS aktif setiap hari.</p>
+      <a href="https://wa.me/6285124706417?text=Halo+YELL%2C+saya+mau+order" target="_blank" class="f-cs-btn">
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        085124706417
+      </a>
+    </div>
+    <div>
+      <div class="f-col-title">Produk</div>
+      <div class="f-links">
+        <a href="#" onclick="switchTab('streaming')">🎬 Akun Streaming</a>
+        <a href="#" onclick="switchTab('pulsa')">📱 Pulsa & Data</a>
+        <a href="#" onclick="switchTab('game')">🎮 Voucher Game</a>
+        <a href="#" onclick="switchTab('jasa')">💻 Jasa Website</a>
+      </div>
+    </div>
+    <div>
+      <div class="f-col-title">Info</div>
+      <div class="f-links">
+        <a href="#tentang">Keunggulan</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://wa.me/6285124706417" target="_blank">Hubungi CS</a>
+        <a href="https://wa.me/6285124706417?text=Mau+jadi+reseller+YELL" target="_blank">Jadi Reseller</a>
+      </div>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2026 YELL Digital Store — All rights reserved</span>
+    <span>CS: 085124706417</span>
+  </div>
+</footer>
+
+<!-- CS WIDGET -->
+<div class="cs-wrap">
+  <button class="cs-toggle-btn" onclick="toggleCS()">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <div class="cs-badge-dot">1</div>
+  </button>
+  <div class="cs-popup-box" id="csPanel">
+    <div class="cs-pop-head">
+      <div class="cs-pop-av">🧑‍💼</div>
+      <div>
+        <div class="cs-pop-name">CS YELL</div>
+        <div class="cs-pop-status"><span class="online-pulse"></span> Online — siap bantu!</div>
+      </div>
+    </div>
+    <div class="cs-pop-body">
+      <div class="cs-pop-msg">Halo! 👋 Selamat datang di <strong>YELL Digital Store</strong>!<br>Ada yang bisa kami bantu? Chat langsung yuk~ ✨</div>
+      <div class="cs-pop-actions">
+        <a href="https://wa.me/6285124706417?text=Halo+YELL%2C+mau+order+produk" target="_blank" class="cs-pop-act primary">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat & Order Sekarang
+        </a>
+        <a href="https://wa.me/6285124706417?text=Cek+status+order+saya" target="_blank" class="cs-pop-act">📦 Cek Status Order</a>
+        <a href="https://wa.me/6285124706417?text=Mau+tanya+harga+reseller+YELL" target="_blank" class="cs-pop-act">💼 Info Harga Reseller</a>
+      </div>
+    </div>
+    <div class="cs-pop-foot">CS: <strong>085124706417</strong> · Aktif setiap hari</div>
+  </div>
+</div>
+
+<script>
+  // State
+  let prodTerpilih = '', hargaTerpilih = 0, catTerpilih = '';
+
+  // TAB SWITCH
+  function switchTab(tab) {
+    document.querySelectorAll('.cat-tab').forEach((t,i) => {
+      const tabs = ['streaming','pulsa','game','jasa'];
+      t.classList.toggle('active', tabs[i] === tab);
+    });
+    document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-'+tab).classList.add('active');
+
+    const catMap = { streaming:'Akun Streaming', pulsa:'Pulsa & Data', game:'Voucher Game', jasa:'Jasa Website' };
+    catTerpilih = catMap[tab];
+
+    // Scroll to catalog on mobile
+    if(window.innerWidth < 768) {
+      setTimeout(() => document.getElementById('katalog').scrollIntoView({behavior:'smooth'}), 100);
+    }
+  }
+
+  // TAB FROM HERO CARD (also scroll)
+  const origSwitch = switchTab;
+
+  // PILIH PRODUK
+  function pilih(el, nama, harga) {
+    document.querySelectorAll('.prod-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    prodTerpilih = nama; hargaTerpilih = harga;
+    document.getElementById('selInfo').classList.add('show');
+    document.getElementById('selNama').textContent = nama;
+    updateSummary();
+    setTimeout(() => document.getElementById('order').scrollIntoView({behavior:'smooth', block:'start'}), 200);
+  }
+
+  function updateSummary() {
+    document.getElementById('sProd').textContent = prodTerpilih || 'Belum dipilih';
+    document.getElementById('sCat').textContent = catTerpilih || '—';
+    document.getElementById('sBayar').textContent = document.getElementById('fBayar').value || '—';
+    document.getElementById('sTotal').textContent = hargaTerpilih ? 'Rp ' + hargaTerpilih.toLocaleString('id-ID') : 'Rp —';
+  }
+
+  document.getElementById('fBayar').addEventListener('change', updateSummary);
+
+  // KIRIM ORDER
+  function kirim() {
+    const nama = document.getElementById('fNama').value.trim();
+    const wa   = document.getElementById('fWA').value.trim();
+    const bayar= document.getElementById('fBayar').value;
+    const extra= document.getElementById('fExtra').value.trim();
+    const note = document.getElementById('fNote').value.trim();
+
+    if (!prodTerpilih) { alert('⚠️ Pilih produk dulu di katalog!'); return; }
+    if (!nama) { alert('⚠️ Isi nama kamu dulu!'); return; }
+    if (!wa)   { alert('⚠️ Isi nomor WhatsApp kamu!'); return; }
+    if (!bayar){ alert('⚠️ Pilih metode pembayaran!'); return; }
+
+    const total = 'Rp ' + hargaTerpilih.toLocaleString('id-ID');
+    const msg = encodeURIComponent(
+      `🛒 *ORDER BARU — YELL STORE*\n` +
+      `━━━━━━━━━━━━━━━━\n` +
+      `🏷️ Kategori: ${catTerpilih}\n` +
+      `📦 Produk: ${prodTerpilih}\n` +
+      `💰 Total: ${total}\n` +
+      `━━━━━━━━━━━━━━━━\n` +
+      `👤 Nama: ${nama}\n` +
+      `📱 WA: ${wa}\n` +
+      `💳 Bayar via: ${bayar}\n` +
+      (extra ? `🎯 Info Tambahan: ${extra}\n` : '') +
+      (note  ? `📝 Catatan: ${note}\n` : '') +
+      `━━━━━━━━━━━━━━━━\n` +
+      `Tolong segera diproses ya kak! 🙏`
+    );
+
+    const link = `https://wa.me/6285124706417?text=${msg}`;
+    document.getElementById('btnOrder').disabled = true;
+    document.getElementById('successBox').classList.add('show');
+    const bWA = document.getElementById('btnWA');
+    bWA.href = link; bWA.classList.add('show');
+    setTimeout(() => window.open(link, '_blank'), 500);
+  }
+
+  // CS
+  function toggleCS() {
+    document.getElementById('csPanel').classList.toggle('open');
+  }
+  document.addEventListener('click', e => {
+    const w = document.querySelector('.cs-wrap');
+    if (!w.contains(e.target)) document.getElementById('csPanel').classList.remove('open');
+  });
+</script>
+</body>
+</html>
